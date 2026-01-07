@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Completed Tasks">
+        <template lwc:if={completedTasks}>
+            <lightning-datatable 
+            key-field="id"
+            data={completedTasks}
+            columns={columns}></lightning-datatable>
+        </template>
+        <template lwc:if={error}>
+            <p>Error while fetching completed tasks</p>
+        </template>
+    </lightning-card>
+</template>
