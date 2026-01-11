@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Create Valid Contacts">
+        <lightning-combobox
+        title="Account"
+        value={selectedAccountId}
+        options={accounts}
+        onchange={handleComboChange}></lightning-combobox>
+        <br>
+        <lightning-button
+        variant="brand"
+        label="Create New Contact"
+        onclick={checkValidContact}
+        disabled={isDisabled}></lightning-button>
+    </lightning-card>
+</template>
