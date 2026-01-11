@@ -4,6 +4,7 @@ import getComboboxAccounts from '@salesforce/apex/AccountController.getComboboxA
 export default class InsertValidContacts extends LightningElement {
     accounts = []
     selectedAccountId
+    selectedAccountIdWithRecordPicker
     error
     isDisabled = true
 
@@ -22,5 +23,9 @@ export default class InsertValidContacts extends LightningElement {
     handleComboChange(event){
         this.selectedAccountId = event.detail.value;
         this.isDisabled = false
+    }
+
+    handleChange(event){
+        this.selectedAccountIdWithRecordPicker = event.detail.recordId;
     }
 }

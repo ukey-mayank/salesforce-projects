@@ -11,5 +11,10 @@
         label="Create New Contact"
         onclick={checkValidContact}
         disabled={isDisabled}></lightning-button>
+        <br>
+        <lightning-record-picker
+        label="With Record Picker"
+        object-api-name="Account"
+        onchange={handleChange}></lightning-record-picker>
     </lightning-card>
 </template>
