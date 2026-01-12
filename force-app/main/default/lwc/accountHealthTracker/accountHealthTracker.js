@@ -1,29 +1,35 @@
 import { LightningElement, wire } from 'lwc';
+import { refreshApex } from '@salesforce/apex';
 import getAccountHealth from '@salesforce/apex/AccountHealthController.getAccountHealth';
 
 export default class AccountHealthTracker extends LightningElement {
 
     accounts = [];
     filteredAccounts = [];
-    selectedFilter = 'All';
-
-    filterOptions = [
-        { label: 'All', value: 'All' },
-        { label: 'Healthy', value: 'Healthy' },
-        { label: 'Warning', value: 'Warning' },
-        { label: 'Critical', value: 'Critical' }
-    ];
+    wiredResult;
+    isLoading = false;
 
     @wire(getAccountHealth)
-    wiredData({ data, error }) {
-        if (data) {
-            this.accounts = data.map(acc => ({
+    wiredData(result) {
+        this.wiredResult = result;
+
+        if (result.data) {
+            this.accounts = result.data.map(acc => ({
                 ...acc,
                 badgeClass: this.getBadgeClass(acc.healthScore),
                 status: this.getStatus(acc.healthScore)
             }));
             this.filteredAccounts = this.accounts;
         }
+    }
+
+    handleRefresh() {
+        this.isLoading = true;
+
+        refreshApex(this.wiredResult)
+            .finally(() => {
+                this.isLoading = false;
+            });
     }
 
     getBadgeClass(score) {
@@ -36,17 +42,5 @@ export default class AccountHealthTracker extends LightningElement {
         if (score >= 80) return 'Healthy';
         if (score >= 50) return 'Warning';
         return 'Critical';
-    }
-
-    handleFilterChange(event) {
-        this.selectedFilter = event.detail.value;
-
-        if (this.selectedFilter === 'All') {
-            this.filteredAccounts = this.accounts;
-        } else {
-            this.filteredAccounts = this.accounts.filter(
-                acc => acc.status === this.selectedFilter
-            );
-        }
     }
 }

@@ -1,25 +1,24 @@
 <template>
     <lightning-card title="Account Health Tracker 🌱">
 
-        <lightning-combobox
-            label="Filter by Health"
-            value={selectedFilter}
-            options={filterOptions}
-            onchange={handleFilterChange}>
-        </lightning-combobox>
+        <lightning-button
+            label="Refresh"
+            icon-name="utility:refresh"
+            onclick={handleRefresh}
+            class="slds-m-bottom_small">
+        </lightning-button>
 
-        <template if:true={filteredAccounts}>
-            <template for:each={filteredAccounts} for:item="acc">
-                <div key={acc.name} class="slds-box slds-m-around_small">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
 
-                    <p><strong>{acc.name}</strong></p>
-
-                    <span class="slds-badge {acc.badgeClass}">
-                        {acc.healthScore}
-                    </span>
-
-                </div>
-            </template>
+        <template for:each={filteredAccounts} for:item="acc">
+            <div key={acc.name} class="slds-box slds-m-around_small">
+                <p><strong>{acc.name}</strong></p>
+                <span class="slds-badge {acc.badgeClass}">
+                    {acc.healthScore}
+                </span>
+            </div>
         </template>
 
     </lightning-card>
