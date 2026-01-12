@@ -1,16 +1,20 @@
 <template>
     <lightning-card title="Account Health Tracker 🌱">
 
-        <template if:true={accounts}>
-            <template for:each={accounts} for:item="acc">
+        <lightning-combobox
+            label="Filter by Health"
+            value={selectedFilter}
+            options={filterOptions}
+            onchange={handleFilterChange}>
+        </lightning-combobox>
+
+        <template if:true={filteredAccounts}>
+            <template for:each={filteredAccounts} for:item="acc">
                 <div key={acc.name} class="slds-box slds-m-around_small">
 
-                    <p>
-                        <strong>{acc.name}</strong>
-                    </p>
+                    <p><strong>{acc.name}</strong></p>
 
-                    <span
-                        class="slds-badge {acc.badgeClass}">
+                    <span class="slds-badge {acc.badgeClass}">
                         {acc.healthScore}
                     </span>
 
