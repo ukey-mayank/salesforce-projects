@@ -14,6 +14,7 @@ public with sharing class ContactController {
       SELECT Id, LastName
       FROM Contact
       WHERE AccountId = :accountId
+      WITH SECURITY_ENFORCED
     ];
   }
 }
