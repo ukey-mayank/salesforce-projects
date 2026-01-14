@@ -1,4 +1,5 @@
 import { LightningElement, wire } from "lwc";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import getAccounts from "@salesforce/apex/AccountController.getAccounts";
 
 export default class ParentComponent extends LightningElement {
@@ -9,6 +10,12 @@ export default class ParentComponent extends LightningElement {
     if (data) {
       this.accounts = data;
       this.error = undefined;
+      const event = new ShowToastEvent({
+        title: "Success",
+        message: this.numberOfAccounts + " Accounts fetched successfully",
+        variant: "success"
+      });
+      this.dispatchEvent(event);
     } else if (error) {
       this.error = error;
       this.data = undefined;
