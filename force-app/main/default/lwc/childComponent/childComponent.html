@@ -1,5 +1,9 @@
 <template>
-    <lightning-card title="Child Component Inside Parent">
-        <p>Parent Name - {parentName}</p>
-    </lightning-card>
+  <lightning-card title="Child Component Inside Parent">
+    <lightning-datatable
+      key-field="Id"
+      data={contacts}
+      columns={columns}
+    ></lightning-datatable>
+  </lightning-card>
 </template>

@@ -1,3 +1,8 @@
 <template>
-    <c-child-component parent-name="Salesforce Learning"></c-child-component>
+  <lightning-card title="Account to Fetch Contacts">
+    <c-child-component
+      parent-name="Salesforce Learning"
+      account-id={accountId}
+    ></c-child-component>
+  </lightning-card>
 </template>
