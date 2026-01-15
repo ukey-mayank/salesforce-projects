@@ -1,12 +1,12 @@
 <template>
   <lightning-card title="Create New Contact">
-    <lightning-input type="text" label="Enter First Name"></lightning-input>
-    <lightning-input type="text" label="Enter Last Name"></lightning-input>
-    <lightning-input type="email" label="Enter Email"></lightning-input>
-    <lightning-input type="tel" label="Enter Phone"></lightning-input>
-    <lightning-input
-      type="text"
-      label="Enter More Details about Yourself"
-    ></lightning-input>
+    <template for:each={inputData} for:item="item">
+      <lightning-input
+        key={item.Id}
+        type={item.type}
+        label={item.label}
+        class={item.classList}
+      ></lightning-input>
+    </template>
   </lightning-card>
 </template>
