@@ -68,11 +68,9 @@ export default class CreateContactWithForm extends LightningElement {
     })
       .then((result) => {
         console.log("Contact Created: ", result);
-        this.inputData[0].defaultValue = "";
-        this.inputData[1].defaultValue = "";
-        this.inputData[2].defaultValue = "";
-        this.inputData[3].defaultValue = "";
-        this.inputData[4].defaultValue = "";
+        this.inputData = this.inputData.map((item) => {
+          return { ...item, defaultValue: "" };
+        });
         const toastEvent = new ShowToastEvent({
           type: "success",
           message: "Contact created successfully!",
