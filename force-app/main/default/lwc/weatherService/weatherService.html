@@ -1,0 +1,27 @@
+<template>
+  <lightning-card
+    title={currentCity}
+    variant="Narrow"
+    icon-name="standard:account"
+  >
+    <lightning-input
+      type="text"
+      label="Enter City"
+      placeholder={currentCity}
+      onchange={handleInputChange}
+      class="slds-m-around_small"
+    ></lightning-input>
+    <lightning-combobox
+      label="Weather Type"
+      options={weatherOptions}
+      onchange={handleChange}
+      class="slds-m-around_small"
+    ></lightning-combobox>
+    <lightning-button
+      variant="brand"
+      onclick={handleBtnClick}
+      label="Get Weather"
+      class="slds-m-top_small"
+    ></lightning-button>
+  </lightning-card>
+</template>
