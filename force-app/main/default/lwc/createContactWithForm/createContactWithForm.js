@@ -1,5 +1,6 @@
 import { LightningElement } from "lwc";
 import createContact from "@salesforce/apex/ContactController.createContact";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 export default class CreateContactWithForm extends LightningElement {
   inputData = [
@@ -67,6 +68,17 @@ export default class CreateContactWithForm extends LightningElement {
     })
       .then((result) => {
         console.log("Contact Created: ", result);
+        this.inputData[0].defaultValue = "";
+        this.inputData[1].defaultValue = "";
+        this.inputData[2].defaultValue = "";
+        this.inputData[3].defaultValue = "";
+        this.inputData[4].defaultValue = "";
+        const toastEvent = new ShowToastEvent({
+          type: "success",
+          message: "Contact created successfully!",
+          title: "Success"
+        });
+        this.dispatchEvent(toastEvent);
       })
       .catch((error) => {
         console.log("Error: ", error);
