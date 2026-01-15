@@ -6,7 +6,15 @@
         type={item.type}
         label={item.label}
         class={item.classList}
+        value={item.value}
+        data-id={item.Id}
+        onchange={handleInputChange}
       ></lightning-input>
     </template>
+    <lightning-button
+      variant="brand"
+      label="Create Contact"
+      onclick={handleBtnClick}
+    ></lightning-button>
   </lightning-card>
 </template>

@@ -17,4 +17,27 @@ public with sharing class ContactController {
       WITH SECURITY_ENFORCED
     ];
   }
+
+  @SuppressWarnings('PMD.ExcessiveParameterList')
+  @AuraEnabled
+  public static void createContact(
+    String firstName,
+    String lastName,
+    String email,
+    String phone,
+    String description
+  ) {
+    List<Contact> consToBeCreated = new List<Contact>();
+    Contact con = new Contact();
+    con.firstName = firstName;
+    con.lastName = lastName;
+    con.email = email;
+    con.phone = phone;
+    con.description = description;
+
+    consToBeCreated.add(con);
+    if (!consToBeCreated.isEmpty()) {
+      insert consToBeCreated;
+    }
+  }
 }
