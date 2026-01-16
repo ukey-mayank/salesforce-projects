@@ -32,20 +32,9 @@
 
       <template if:true={weather}>
         <div class="slds-box slds-m-top_medium">
-          <p><b>City: </b>{weather.name}</p>
-          <p><b>Country: </b>{weather.country}</p>
-          <p><b>Timezone: </b>{weather.timezone_id}</p>
-          <p><b>Observation Time: </b>{weather.observation_time}</p>
-          <p><b>Temperature: </b>{weather.temperature}</p>
-          <p><b>Weather Description: </b>{weather.weather_description}</p>
-          <p><b>Sunrise: </b>{weather.sunrise}</p>
-          <p><b>Sunset: </b>{weather.sunset}</p>
-          <p><b>Air Quality: </b>{weather.pm2_5}</p>
-          <p><b>Wind Speed: </b>{weather.wind_speed}</p>
-          <p><b>Pressure: </b>{weather.pressure}</p>
-          <p><b>Humidity: </b>{weather.humidity}</p>
-          <p><b>Visibility: </b>{weather.visibility}</p>
-          <p><b>Is Day?: </b>{weather.is_day}</p>
+          <template for:each={weatherFields} for:item="field">
+            <p key={field.key}><b>{field.label}: </b>{field.value}</p>
+          </template>
         </div>
       </template>
     </div>
