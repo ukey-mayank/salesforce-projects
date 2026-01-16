@@ -1,43 +1,53 @@
 <template>
   <lightning-card
     title={currentCity}
-    variant="Narrow"
-    icon-name="standard:account"
+    variant="narrow"
+    icon-name="utility:location"
   >
-    <lightning-input
-      type="text"
-      label="Enter City"
-      placeholder={currentCity}
-      onchange={handleInputChange}
-      class="slds-m-around_small"
-    ></lightning-input>
-    <lightning-combobox
-      label="Weather Type"
-      options={weatherOptions}
-      onchange={handleChange}
-      class="slds-m-around_small"
-    ></lightning-combobox>
-    <lightning-button
-      variant="brand"
-      onclick={handleBtnClick}
-      label="Get Weather"
-      class="slds-m-top_small"
-    ></lightning-button>
-    <lightning-card title="Details">
-      <p>City - {currentCity}</p>
-      <p>Country - {country}</p>
-      <p>Timezone - {timezone_id}</p>
-      <p>Observation Time - {observation_time}</p>
-      <p>Temperature - {temperature}</p>
-      <p>Weather Description - {weather_description}</p>
-      <p>Sunrise - {sunrise}</p>
-      <p>Sunset - {sunset}</p>
-      <p>Air Quality - {pm2_5}</p>
-      <p>Wind Speed - {wind_speed}</p>
-      <p>Pressure - {pressure}</p>
-      <p>Humidity - {humidity}</p>
-      <p>Visibility - {visibility}</p>
-      <p>Is Day? - {is_day}</p>
-    </lightning-card>
+    <div class="slds-p-around_small">
+      <lightning-input
+        type="text"
+        label="Enter City"
+        placeholder={currentCity}
+        onchange={handleInputChange}
+        class="slds-m-around_small"
+      ></lightning-input>
+      <lightning-combobox
+        label="Weather Type"
+        options={weatherOptions}
+        onchange={handleChange}
+        class="slds-m-around_small"
+      ></lightning-combobox>
+      <lightning-button
+        variant="brand"
+        onclick={handleBtnClick}
+        label="Get Weather"
+        class="slds-m-top_small"
+        disabled={isLoading}
+      ></lightning-button>
+
+      <template if:true={isLoading}>
+        <lightning-spinner size="small"></lightning-spinner>
+      </template>
+
+      <template if:true={weather}>
+        <div class="slds-box slds-m-top_medium">
+          <p><b>City: </b>{weather.name}</p>
+          <p><b>Country: </b>{weather.country}</p>
+          <p><b>Timezone: </b>{weather.timezone_id}</p>
+          <p><b>Observation Time: </b>{weather.observation_time}</p>
+          <p><b>Temperature: </b>{weather.temperature}</p>
+          <p><b>Weather Description: </b>{weather.weather_description}</p>
+          <p><b>Sunrise: </b>{weather.sunrise}</p>
+          <p><b>Sunset: </b>{weather.sunset}</p>
+          <p><b>Air Quality: </b>{weather.pm2_5}</p>
+          <p><b>Wind Speed: </b>{weather.wind_speed}</p>
+          <p><b>Pressure: </b>{weather.pressure}</p>
+          <p><b>Humidity: </b>{weather.humidity}</p>
+          <p><b>Visibility: </b>{weather.visibility}</p>
+          <p><b>Is Day?: </b>{weather.is_day}</p>
+        </div>
+      </template>
+    </div>
   </lightning-card>
 </template>
