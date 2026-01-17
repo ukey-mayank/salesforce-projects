@@ -1,7 +1,7 @@
 /**
  * @description you can fetch real-time aviation data
  */
-public with sharing class AviationService {
+public with sharing class AviationService extends BaseApiService {
   @AuraEnabled
   public static List<FlightDTO> getAviationData(Integer flightLimit) {
     // retrieve API Key from custom metadata record
@@ -15,13 +15,8 @@ public with sharing class AviationService {
       endPoint += '&limit=' + flightLimit;
     }
 
-    // construction of HTTP request
-    Http http = new Http();
-    HttpRequest req = new HttpRequest();
-    req.setMethod('GET');
-    req.setEndpoint(endPoint);
-
-    HttpResponse res = http.send(req);
+    AviationService service = new AviationService();
+    HttpResponse res = service.sendGet(endPoint);
     // deserialize the response body
     Map<String, Object> payload = (Map<String, Object>) JSON.deserializeUntyped(
       res.getBody()

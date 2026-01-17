@@ -3,7 +3,7 @@
 Created By: Mayank Ukey
 Date: 15th Jan, 2026
 */
-public with sharing class WeatherService {
+public with sharing class WeatherService extends BaseApiService {
   /*
    * @description this method performs callout to https://api.weatherstack.com/ base url.
    * As per the user input, current, historical, forecast data can be get for a particular location in the world
@@ -20,12 +20,10 @@ public with sharing class WeatherService {
       apiKey +
       '&query=' +
       EncodingUtil.urlEncode(location, 'UTF-8');
-    Http http = new Http();
-    HttpRequest req = new HttpRequest();
-    req.setMethod('GET');
-    req.setEndpoint(endPoint);
 
-    HttpResponse res = http.send(req);
+    WeatherService service = new WeatherService();
+
+    HttpResponse res = service.sendGet(endPoint);
     Map<String, Object> payload = (Map<String, Object>) JSON.deserializeUntyped(
       res.getBody()
     );
