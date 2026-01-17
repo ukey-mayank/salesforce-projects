@@ -1,3 +1,17 @@
 <template>
-    
+  <lightning-card title="Get Flight Details">
+    <lightning-input
+      type="number"
+      label="Number of flights to be fetched"
+      class="slds-m-around_medium"
+      onchange={handleInputChange}
+    ></lightning-input>
+    <lightning-button
+      variant="brand"
+      onclick={getFlightData}
+      label="Fetch Flights"
+      class="slds-m-left_small"
+      disabled={isLoading}
+    ></lightning-button>
+  </lightning-card>
 </template>
