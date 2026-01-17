@@ -13,5 +13,24 @@
       class="slds-m-left_small"
       disabled={isLoading}
     ></lightning-button>
+
+    <template if:true={isLoading}>
+      <lightning-spinner size="small"></lightning-spinner>
+    </template>
+
+    <template if:true={aviationData}>
+      <template for:each={aviationData} for:item="data">
+        <div key={data.flight_number} class="slds-box slds-m-around_medium">
+          <p><b>Airline Name: </b>{data.airline_name}</p>
+          <p><b>Flight Name: </b>{data.flight_number}</p>
+          <p><b>Departure Airport: </b>{data.dep_airport}</p>
+          <p><b>Departure Timezone: </b>{data.dep_timezone}</p>
+          <p><b>Arrival Airport: </b>{data.arrival_airport}</p>
+          <p><b>Arrival Timezone: </b>{data.arrival_timezone}</p>
+          <p><b>Flight Date: </b>{data.flight_date}</p>
+          <p><b>Flight Status: </b>{data.flight_status}</p>
+        </div>
+      </template>
+    </template>
   </lightning-card>
 </template>
