@@ -21,34 +21,46 @@ const STATUS_OPTIONS = [
   { label: "In Progress", value: "In Progress" },
   { label: "Completed", value: "Completed" }
 ];
+
 export default class ServiceRequest extends LightningElement {
   severityOptions = SEVERITY_OPTIONS;
   typeOptions = TYPE_OPTIONS;
   priorityOptions = PRIORITY_OPTIONS;
   statusOptions = STATUS_OPTIONS;
 
-  subject;
-  selectedSeverity;
-  selectedType;
-  selectedPriority;
-  selectedStatus;
+  formData = {
+    subject: "",
+    selectedSeverity: "",
+    selectedType: "",
+    selectedPriority: "",
+    selectedStatus: ""
+  };
 
   handleInputChange(event) {
     const field = event.target.dataset.field;
-    console.log("Field:", field);
     const value = event.detail.value || event.target.value;
 
-    this[field] = value;
+    this.formData = { ...this.formData, [field]: value };
+  }
+
+  resetForm() {
+    this.formData = {
+      subject: "",
+      selectedSeverity: "",
+      selectedType: "",
+      selectedPriority: "",
+      selectedStatus: ""
+    };
   }
 
   // it handles the event from button
   createServiceRequest() {
     createServiceRequestRecord({
-      subject: this.subject,
-      severity: this.selectedSeverity,
-      type: this.selectedType,
-      priority: this.selectedPriority,
-      status: this.selectedStatus
+      subject: this.formData.subject,
+      severity: this.formData.selectedSeverity,
+      type: this.formData.selectedType,
+      priority: this.formData.selectedPriority,
+      status: this.formData.selectedStatus
     })
       .then(() => {
         this.dispatchEvent(
@@ -61,6 +73,19 @@ export default class ServiceRequest extends LightningElement {
       })
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        this.resetForm();
       });
+  }
+
+  get isDisabled() {
+    return !(
+      this.formData.subject &&
+      this.formData.selectedSeverity &&
+      this.formData.selectedType &&
+      this.formData.selectedPriority &&
+      this.formData.selectedStatus
+    );
   }
 }
