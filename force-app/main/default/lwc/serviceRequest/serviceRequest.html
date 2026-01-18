@@ -7,6 +7,7 @@
       data-field="subject"
       placeholder="Enter request subject"
       onchange={handleInputChange}
+      class="slds-m-around_medium"
     ></lightning-input>
     <!--Severity-->
     <lightning-combobox
@@ -17,6 +18,7 @@
       value={selectedSeverity}
       options={severityOptions}
       onchange={handleInputChange}
+      class="slds-m-around_medium"
     ></lightning-combobox>
     <!--Type-->
     <lightning-combobox
@@ -27,6 +29,7 @@
       value={selectedType}
       options={typeOptions}
       onchange={handleInputChange}
+      class="slds-m-around_medium"
     ></lightning-combobox>
 
     <!--Priority-->
@@ -38,6 +41,7 @@
       value={selectedPriority}
       options={priorityOptions}
       onchange={handleInputChange}
+      class="slds-m-around_medium"
     ></lightning-combobox>
 
     <!--Status-->
@@ -49,6 +53,7 @@
       value={selectedStatus}
       options={statusOptions}
       onchange={handleInputChange}
+      class="slds-m-around_medium"
     ></lightning-combobox>
 
     <!--submit button-->
@@ -57,6 +62,7 @@
       variant="brand"
       onclick={createServiceRequest}
       disabled={isDisabled}
+      class="slds-m-top_medium"
     ></lightning-button>
   </lightning-card>
 </template>
