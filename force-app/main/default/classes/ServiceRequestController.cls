@@ -1,6 +1,7 @@
 public with sharing class ServiceRequestController {
   @AuraEnabled
   public static void createServiceRequestRecord(
+    String subject,
     String severity,
     String type,
     String priority,
@@ -8,6 +9,7 @@ public with sharing class ServiceRequestController {
   ) {
     try {
       Service_Request__c request = new Service_Request__c();
+      request.subject__c = subject;
       request.severity__c = severity;
       request.type__c = type;
       request.priority__c = priority;

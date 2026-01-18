@@ -26,10 +26,15 @@ export default class ServiceRequest extends LightningElement {
   priorityOptions = PRIORITY_OPTIONS;
   statusOptions = STATUS_OPTIONS;
 
+  subject;
   selectedSeverity;
   selectedType;
   selectedPriority;
   selectedStatus;
+
+  handleSubjectChange(event) {
+    this.subject = event.target.value;
+  }
 
   // severity change handler
   handleSeverityChange(event) {
@@ -54,6 +59,7 @@ export default class ServiceRequest extends LightningElement {
   // it handles the event from button
   createServiceRequest() {
     createServiceRequestRecord({
+      subject: this.subject,
       severity: this.selectedSeverity,
       type: this.selectedType,
       priority: this.selectedPriority,
