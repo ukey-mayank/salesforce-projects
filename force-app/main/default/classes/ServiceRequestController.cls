@@ -7,6 +7,11 @@ public with sharing class ServiceRequestController {
     String priority,
     String status
   ) {
+    System.debug('Subject: ' + subject);
+    System.debug('Severity: ' + severity);
+    System.debug('Type: ' + type);
+    System.debug('Priority: ' + priority);
+    System.debug('Status: ' + status);
     try {
       Service_Request__c request = new Service_Request__c();
       request.subject__c = subject;

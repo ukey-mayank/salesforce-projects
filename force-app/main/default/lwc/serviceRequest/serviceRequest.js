@@ -1,24 +1,25 @@
 import { LightningElement } from "lwc";
 import createServiceRequestRecord from "@salesforce/apex/ServiceRequestController.createServiceRequestRecord";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 const SEVERITY_OPTIONS = [
-  { label: "High", value: "high" },
-  { label: "Medium", value: "medium" },
-  { label: "Low", value: "low" }
+  { label: "High", value: "High" },
+  { label: "Medium", value: "Medium" },
+  { label: "Low", value: "Low" }
 ];
 const TYPE_OPTIONS = [
-  { label: "Hardware", value: "hardware" },
-  { label: "Software", value: "software" }
+  { label: "Hardware", value: "Hardware" },
+  { label: "Software", value: "Software" }
 ];
 const PRIORITY_OPTIONS = [
-  { label: "Urgent", value: "urgent" },
-  { label: "Normal", value: "normal" },
-  { label: "Calm", value: "calm" }
+  { label: "Urgent", value: "Urgent" },
+  { label: "Normal", value: "Normal" },
+  { label: "Calm", value: "Calm" }
 ];
 const STATUS_OPTIONS = [
-  { label: "New", value: "new" },
-  { label: "In Progress", value: "inProgress" },
-  { label: "Completed", value: "completed" }
+  { label: "New", value: "New" },
+  { label: "In Progress", value: "In Progress" },
+  { label: "Completed", value: "Completed" }
 ];
 export default class ServiceRequest extends LightningElement {
   severityOptions = SEVERITY_OPTIONS;
@@ -65,8 +66,14 @@ export default class ServiceRequest extends LightningElement {
       priority: this.selectedPriority,
       status: this.selectedStatus
     })
-      .then((result) => {
-        console.log(result);
+      .then(() => {
+        this.dispatchEvent(
+          new ShowToastEvent({
+            type: "success",
+            title: "Success",
+            message: "Service Request created successfully"
+          })
+        );
       })
       .catch((error) => {
         console.error(error);
