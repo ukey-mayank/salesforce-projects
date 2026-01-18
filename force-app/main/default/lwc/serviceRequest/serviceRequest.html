@@ -1,0 +1,55 @@
+<template>
+  <lightning-card title="Create Service Request">
+    <!--Subject-->
+    <lightning-input
+      type="text"
+      label="Subject"
+      placeholder="Enter request subject"
+    ></lightning-input>
+    <!--Severity-->
+    <lightning-combobox
+      name="severity"
+      label="Severity"
+      placeholder="Select severity"
+      value={selectedSeverity}
+      options={severityOptions}
+      onchange={handleSeverityChange}
+    ></lightning-combobox>
+    <!--Type-->
+    <lightning-combobox
+      name="type"
+      label="Type"
+      placeholder="Select type"
+      value={selectedType}
+      options={typeOptions}
+      onchange={handleTypeChange}
+    ></lightning-combobox>
+
+    <!--Priority-->
+    <lightning-combobox
+      name="priority"
+      label="Priority"
+      placeholder="Select priority"
+      value={selectedPriority}
+      options={priorityOptions}
+      onchange={handlePriorityChange}
+    ></lightning-combobox>
+
+    <!--Status-->
+    <lightning-combobox
+      name="status"
+      label="Status"
+      placeholder="Select status"
+      value={selectedStatus}
+      options={statusOptions}
+      onchange={handleStatusChange}
+    ></lightning-combobox>
+
+    <!--submit button-->
+    <lightning-button
+      label="Create"
+      variant="brand"
+      onclick={createServiceRequest}
+    ></lightning-button>
+  </lightning-card>
+</template>
