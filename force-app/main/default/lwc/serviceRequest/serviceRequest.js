@@ -33,28 +33,12 @@ export default class ServiceRequest extends LightningElement {
   selectedPriority;
   selectedStatus;
 
-  handleSubjectChange(event) {
-    this.subject = event.target.value;
-  }
+  handleInputChange(event) {
+    const field = event.target.dataset.field;
+    console.log("Field:", field);
+    const value = event.detail.value || event.target.value;
 
-  // severity change handler
-  handleSeverityChange(event) {
-    this.selectedSeverity = event.detail.value;
-  }
-
-  // type change handler
-  handleTypeChange(event) {
-    this.selectedType = event.detail.value;
-  }
-
-  // priority change handler
-  handlePriorityChange(event) {
-    this.selectedPriority = event.detail.value;
-  }
-
-  // status change handler
-  handleStatusChange(event) {
-    this.selectedStatus = event.detail.value;
+    this[field] = value;
   }
 
   // it handles the event from button

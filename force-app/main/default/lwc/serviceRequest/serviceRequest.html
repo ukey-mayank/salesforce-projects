@@ -4,26 +4,29 @@
     <lightning-input
       type="text"
       label="Subject"
+      data-field="subject"
       placeholder="Enter request subject"
-      onchange={handleSubjectChange}
+      onchange={handleInputChange}
     ></lightning-input>
     <!--Severity-->
     <lightning-combobox
       name="severity"
       label="Severity"
       placeholder="Select severity"
+      data-field="selectedSeverity"
       value={selectedSeverity}
       options={severityOptions}
-      onchange={handleSeverityChange}
+      onchange={handleInputChange}
     ></lightning-combobox>
     <!--Type-->
     <lightning-combobox
       name="type"
       label="Type"
       placeholder="Select type"
+      data-field="selectedType"
       value={selectedType}
       options={typeOptions}
-      onchange={handleTypeChange}
+      onchange={handleInputChange}
     ></lightning-combobox>
 
     <!--Priority-->
@@ -31,9 +34,10 @@
       name="priority"
       label="Priority"
       placeholder="Select priority"
+      data-field="selectedPriority"
       value={selectedPriority}
       options={priorityOptions}
-      onchange={handlePriorityChange}
+      onchange={handleInputChange}
     ></lightning-combobox>
 
     <!--Status-->
@@ -41,9 +45,10 @@
       name="status"
       label="Status"
       placeholder="Select status"
+      data-field="selectedStatus"
       value={selectedStatus}
       options={statusOptions}
-      onchange={handleStatusChange}
+      onchange={handleInputChange}
     ></lightning-combobox>
 
     <!--submit button-->
