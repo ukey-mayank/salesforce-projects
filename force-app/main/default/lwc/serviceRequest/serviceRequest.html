@@ -9,52 +9,19 @@
       onchange={handleInputChange}
       class="slds-m-around_medium"
     ></lightning-input>
-    <!--Severity-->
-    <lightning-combobox
-      name="severity"
-      label="Severity"
-      placeholder="Select severity"
-      data-field="selectedSeverity"
-      value={selectedSeverity}
-      options={severityOptions}
-      onchange={handleInputChange}
-      class="slds-m-around_medium"
-    ></lightning-combobox>
-    <!--Type-->
-    <lightning-combobox
-      name="type"
-      label="Type"
-      placeholder="Select type"
-      data-field="selectedType"
-      value={selectedType}
-      options={typeOptions}
-      onchange={handleInputChange}
-      class="slds-m-around_medium"
-    ></lightning-combobox>
 
-    <!--Priority-->
-    <lightning-combobox
-      name="priority"
-      label="Priority"
-      placeholder="Select priority"
-      data-field="selectedPriority"
-      value={selectedPriority}
-      options={priorityOptions}
-      onchange={handleInputChange}
-      class="slds-m-around_medium"
-    ></lightning-combobox>
-
-    <!--Status-->
-    <lightning-combobox
-      name="status"
-      label="Status"
-      placeholder="Select status"
-      data-field="selectedStatus"
-      value={selectedStatus}
-      options={statusOptions}
-      onchange={handleInputChange}
-      class="slds-m-around_medium"
-    ></lightning-combobox>
+    <template for:each={comboData} for:item="data">
+      <lightning-combobox
+        key={data.label}
+        label={data.label}
+        placeholder={data.placeholder}
+        data-field={data.data_field}
+        value={data.value}
+        options={data.options}
+        onchange={handleInputChange}
+        class={data.className}
+      ></lightning-combobox>
+    </template>
 
     <!--submit button-->
     <lightning-button

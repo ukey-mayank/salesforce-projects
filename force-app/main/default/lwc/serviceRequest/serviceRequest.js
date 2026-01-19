@@ -1,26 +1,12 @@
 import { LightningElement } from "lwc";
 import createServiceRequestRecord from "@salesforce/apex/ServiceRequestController.createServiceRequestRecord";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
-
-const SEVERITY_OPTIONS = [
-  { label: "High", value: "High" },
-  { label: "Medium", value: "Medium" },
-  { label: "Low", value: "Low" }
-];
-const TYPE_OPTIONS = [
-  { label: "Hardware", value: "Hardware" },
-  { label: "Software", value: "Software" }
-];
-const PRIORITY_OPTIONS = [
-  { label: "Urgent", value: "Urgent" },
-  { label: "Normal", value: "Normal" },
-  { label: "Calm", value: "Calm" }
-];
-const STATUS_OPTIONS = [
-  { label: "New", value: "New" },
-  { label: "In Progress", value: "In Progress" },
-  { label: "Completed", value: "Completed" }
-];
+import {
+  SEVERITY_OPTIONS,
+  TYPE_OPTIONS,
+  PRIORITY_OPTIONS,
+  STATUS_OPTIONS
+} from "c/serviceRequestConfig";
 
 export default class ServiceRequest extends LightningElement {
   severityOptions = SEVERITY_OPTIONS;
@@ -41,6 +27,46 @@ export default class ServiceRequest extends LightningElement {
     const value = event.detail.value || event.target.value;
 
     this.formData = { ...this.formData, [field]: value };
+  }
+
+  get comboData() {
+    return [
+      {
+        label: "Severity",
+        placeholder: "Select severity",
+        data_field: "selectedSeverity",
+        value: this.formData.selectedSeverity,
+        options: this.severityOptions,
+        className: "slds-m-around_medium"
+      },
+
+      {
+        label: "Type",
+        placeholder: "Select type",
+        data_field: "selectedType",
+        value: this.formData.selectedType,
+        options: this.typeOptions,
+        className: "slds-m-around_medium"
+      },
+
+      {
+        label: "Priority",
+        placeholder: "Select priority",
+        data_field: "selectedPriority",
+        value: this.formData.selectedPriority,
+        options: this.priorityOptions,
+        className: "slds-m-around_medium"
+      },
+
+      {
+        label: "Status",
+        placeholder: "Select status",
+        data_field: "selectedStatus",
+        value: this.formData.selectedStatus,
+        options: this.statusOptions,
+        className: "slds-m-around_medium"
+      }
+    ];
   }
 
   resetForm() {
