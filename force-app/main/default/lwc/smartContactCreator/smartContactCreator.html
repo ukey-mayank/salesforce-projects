@@ -2,8 +2,11 @@
   <lightning-card title="Smart Contact Creator">
     <lightning-record-form
       object-api-name="Contact"
-      layout-type="full"
+      layout-type="Full"
       mode="edit"
+      onsuccess={handleSuccess}
+      onsubmit={handleSubmit}
+      onfailure={handleFailure}
     ></lightning-record-form>
   </lightning-card>
 </template>
