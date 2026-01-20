@@ -24,6 +24,8 @@ export default class SmartContactCreator extends LightningElement {
   }
 
   showToastEvent(title, message, variant) {
-    this.dispatchEvent(new ShowToastEvent(title, message, variant));
+    this.dispatchEvent(
+      new ShowToastEvent({ title: title, message: message, variant: variant })
+    );
   }
 }
