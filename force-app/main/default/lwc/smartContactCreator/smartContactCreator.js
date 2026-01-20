@@ -7,7 +7,7 @@ export default class SmartContactCreator extends LightningElement {
     event.preventDefault();
     const fields = event.detail.fields;
 
-    validateEmail({ email: fields.email })
+    validateEmail({ email: fields.Email })
       .then(() => {
         this.template.querySelector("lightning-record-form").submit(fields);
       })
