@@ -1,0 +1,22 @@
+<template>
+  <lightning-card title="Case Escalation Dashboard">
+    <template if:true={logs}>
+      <lightning-datatable
+        key-field="Id"
+        data={logs}
+        columns={columns}
+        hide-checkbox-column
+      >
+      </lightning-datatable>
+    </template>
+
+    <template if:true={error}>
+      <p class="slds-text-color_error">{error}</p>
+    </template>
+
+    <div class="slds-m-top_small">
+      <lightning-button label="Refresh" onclick={refreshData} variant="brand">
+      </lightning-button>
+    </div>
+  </lightning-card>
+</template>
