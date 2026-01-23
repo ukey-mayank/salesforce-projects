@@ -1,0 +1,21 @@
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Health Status</label>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Healthy</fullName>
+                <default>false</default>
+            </value>
+            <value>
+                <fullName>At Risk</fullName>
+                <default>false</default>
+            </value>
+            <value>
+                <fullName>Critical</fullName>
+                <default>false</default>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
