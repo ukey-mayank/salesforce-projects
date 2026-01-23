@@ -6,8 +6,18 @@
         <p><b>Amount:</b> {amount}</p>
         <p><b>Created Date:</b> {createdDate}</p>
 
-        <lightning-badge label={healthStatus} class={healthClass}>
-        </lightning-badge>
+        <div class="slds-m-vertical_small">
+          <lightning-badge label={healthStatus} class={healthClass}>
+          </lightning-badge>
+        </div>
+
+        <lightning-button
+          label="Evaluate Health"
+          variant="brand"
+          onclick={handleEvaluate}
+          disabled={isLoading}
+        >
+        </lightning-button>
       </div>
     </template>
 

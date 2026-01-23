@@ -1,7 +1,11 @@
 import { LightningElement, api, wire } from "lwc";
 import { getRecord } from "lightning/uiRecordApi";
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
-// Opportunity fields
+// Apex
+import evaluateHealth from "@salesforce/apex/OpportunityHealthController.evaluateHealth";
+
+// Fields
 import STAGE_FIELD from "@salesforce/schema/Opportunity.StageName";
 import AMOUNT_FIELD from "@salesforce/schema/Opportunity.Amount";
 import CREATEDDATE_FIELD from "@salesforce/schema/Opportunity.CreatedDate";
@@ -13,10 +17,12 @@ export default class OpportunityHealth extends LightningElement {
 
   opportunity;
   error;
+  isLoading = false;
 
   healthStatus = "Not Evaluated";
+  healthReason;
 
-  // LDS usage
+  // LDS
   @wire(getRecord, {
     recordId: "$recordId",
     fields: FIELDS
@@ -31,7 +37,7 @@ export default class OpportunityHealth extends LightningElement {
     }
   }
 
-  // getters for UI
+  // UI getters
   get stage() {
     return this.opportunity?.fields.StageName.value;
   }
@@ -45,8 +51,46 @@ export default class OpportunityHealth extends LightningElement {
   }
 
   get healthClass() {
-    return this.healthStatus === "Healthy"
-      ? "slds-badge_success"
-      : "slds-badge_inverse";
+    switch (this.healthStatus) {
+      case "Healthy":
+        return "slds-badge_success";
+      case "At Risk":
+        return "slds-badge_warning";
+      case "Critical":
+        return "slds-badge_error";
+      default:
+        return "slds-badge_inverse";
+    }
+  }
+
+  // Imperative Apex call
+  handleEvaluate() {
+    this.isLoading = true;
+
+    evaluateHealth({ opportunityId: this.recordId })
+      .then((result) => {
+        this.healthStatus = result.status;
+        this.healthReason = result.reason;
+
+        this.dispatchEvent(
+          new ShowToastEvent({
+            title: "Health Evaluated",
+            message: result.reason,
+            variant: "success"
+          })
+        );
+      })
+      .catch((error) => {
+        this.dispatchEvent(
+          new ShowToastEvent({
+            title: "Error",
+            message: error.body.message,
+            variant: "error"
+          })
+        );
+      })
+      .finally(() => {
+        this.isLoading = false;
+      });
   }
 }
