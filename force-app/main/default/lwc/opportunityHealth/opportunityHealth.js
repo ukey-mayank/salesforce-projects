@@ -93,4 +93,8 @@ export default class OpportunityHealth extends LightningElement {
         this.isLoading = false;
       });
   }
+
+  get hasResult() {
+    return this.healthStatus !== "Not Evaluated";
+  }
 }
