@@ -10,4 +10,10 @@ export default class ActivityWatchdog extends LightningElement {
       this.accounts = data;
     }
   }
+
+  this.accounts = data.map(acc => ({
+    ...acc,
+    health: acc.activityScore >= 30 ? 'Healthy' :
+            acc.activityScore >= 10 ? 'Warning' : 'Critical'
+}));
 }
