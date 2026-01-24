@@ -1,0 +1,12 @@
+<template>
+  <lightning-card title="Activity Watchdog 🐶">
+    <template if:true={accounts}>
+      <template for:each={accounts} for:item="acc">
+        <div key={acc.accountName} class="slds-box slds-m-around_small">
+          <p><strong>{acc.accountName}</strong></p>
+          <p>Score: {acc.activityScore}</p>
+        </div>
+      </template>
+    </template>
+  </lightning-card>
+</template>
