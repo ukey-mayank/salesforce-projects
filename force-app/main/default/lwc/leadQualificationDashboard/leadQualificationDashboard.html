@@ -1,0 +1,12 @@
+<template>
+  <lightning-card title="Lead Qualification Dashboard">
+    <template if:true={leads}>
+      <template for:each={leads} for:item="lead">
+        <div key={lead.id} class="slds-box slds-m-around_small">
+          <p><strong>{lead.name}</strong></p>
+          <p>Score: {lead.score}</p>
+        </div>
+      </template>
+    </template>
+  </lightning-card>
+</template>
