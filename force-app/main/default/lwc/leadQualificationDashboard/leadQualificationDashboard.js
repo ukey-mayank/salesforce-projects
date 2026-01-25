@@ -10,4 +10,12 @@ export default class LeadQualificationDashboard extends LightningElement {
       this.leads = data;
     }
   }
+
+  this.leads = data.map(l => ({
+    ...l,
+    status:
+        l.score >= 80 ? 'Hot' :
+        l.score >= 50 ? 'Warm' :
+        'Cold'
+}));
 }
