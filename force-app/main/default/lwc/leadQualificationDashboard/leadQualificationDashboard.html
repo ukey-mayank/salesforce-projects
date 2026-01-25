@@ -1,13 +1,29 @@
 <template>
   <lightning-card title="Lead Qualification Dashboard">
+    <div class="slds-m-bottom_small">
+      <lightning-button
+        label="Refresh"
+        icon-name="utility:refresh"
+        onclick={handleRefresh}
+      >
+      </lightning-button>
+    </div>
+
+    <template if:true={isLoading}>
+      <lightning-spinner alternative-text="Loading" size="small">
+      </lightning-spinner>
+    </template>
+
     <template if:true={leads}>
       <template for:each={leads} for:item="lead">
         <div key={lead.id} class="slds-box slds-m-around_small">
           <p><strong>{lead.name}</strong></p>
+
           <p>Score: {lead.score}</p>
+
+          <span class="slds-badge"> {lead.status} </span>
         </div>
       </template>
     </template>
-    <span class="slds-badge">{lead.status}</span>
   </lightning-card>
 </template>

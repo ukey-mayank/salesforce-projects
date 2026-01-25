@@ -1,21 +1,29 @@
 import { LightningElement, wire } from "lwc";
+import { refreshApex } from "@salesforce/apex";
 import getQualifiedLeads from "@salesforce/apex/LeadQualificationController.getQualifiedLeads";
 
 export default class LeadQualificationDashboard extends LightningElement {
-  leads;
+  leads = [];
+  wiredResult;
+  isLoading = false;
 
   @wire(getQualifiedLeads)
-  wiredLeads({ data }) {
-    if (data) {
-      this.leads = data;
+  wiredLeads(result) {
+    this.wiredResult = result;
+
+    if (result.data) {
+      this.leads = result.data.map((l) => ({
+        ...l,
+        status: l.score >= 80 ? "Hot" : l.score >= 50 ? "Warm" : "Cold"
+      }));
     }
   }
 
-  this.leads = data.map(l => ({
-    ...l,
-    status:
-        l.score >= 80 ? 'Hot' :
-        l.score >= 50 ? 'Warm' :
-        'Cold'
-}));
+  handleRefresh() {
+    this.isLoading = true;
+
+    refreshApex(this.wiredResult).finally(() => {
+      this.isLoading = false;
+    });
+  }
 }
